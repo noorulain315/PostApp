@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Post App</string>
+    <string name="retry">Retry</string>
+    <string name="comment">Total Comments : </string>
+    <string name="confirm_title">Alert</string>
+    <string name="confirm_msg">Do you really want to go to post details?</string>
+    <string name="proceed">Proceed</string>
+    <string name="cancel">Cancel</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="show_full_post_alert">
+    <item>@string/confirm_title</item>
+    <item>@string/confirm_msg</item>
+    <item>@string/proceed</item>
+    <item></item>
+    <item>@string/cancel</item>
+  </string-array>
+</resources>

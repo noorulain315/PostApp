@@ -1,0 +1,106 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id 'androidx.navigation.safeargs'
+}
+
+android {
+    compileSdk Versions.COMPILE_SDK
+
+    defaultConfig {
+        applicationId "com.example.postapp"
+        minSdk Versions.MIN_SDK
+        targetSdk Versions.TARGET_SDK
+        versionCode Versions.VERSION_CODE
+        versionName Versions.VERSION_NAME
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_API_URL", "\"${Config.STAGING_API_BASE_URL}\""
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_API_URL", "\"${Config.PROD_API_BASE_URL}\""
+
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER_VERSION
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+
+    buildFeatures {
+        compose true
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    //Android
+    implementation(Libs.STDLIB)
+    implementation(Libs.APP_COMPAT)
+    implementation(Libs.CONSTRAINT_LAYOUT)
+    implementation(Libs.DESIGN)
+
+
+    //Network
+    implementation(Libs.RETROFIT)
+    implementation(Libs.MOSHI_KOTLIN)
+    implementation(Libs.MOSHI_CONVERTER)
+    kapt(Libs.MOSHI_KOTLIN_CODE_GEN)
+
+    implementation project(path: ':domain')
+    implementation project(path: ':core')
+    implementation project(path: ':data')
+
+    // Jetpack
+    implementation(Libs.LIFECYCLE_VIEWMODEL_KTX)
+    implementation(Libs.LIFECYCLE_LIVEDATA_KTX)
+    implementation(Libs.NAV_UI_KTX)
+    implementation(Libs.NAV_FRAGMENT_KTX)
+    implementation(Libs.COROUTINE_CORE)
+
+    //Jetpack Compose
+    implementation(Libs.COMPOSE_UI)
+    implementation(Libs.COMPOSE_MATERIAL)
+    implementation(Libs.COMPOSE_MATERIAL_ICON)
+    implementation(Libs.COMPOSE_UI_PREVIEW)
+    implementation(Libs.COMPOSE_FOUNDATION)
+
+
+    //dagger hilt
+    implementation(Libs.HILT)
+    kapt(Libs.HILT_COMPILER)
+
+    //Testing
+    testImplementation(Libs.JUNIT)
+    androidTestImplementation(Libs.JUNIT_EXT)
+    androidTestImplementation(Libs.CORE_TESTING)
+    testImplementation(Libs.COROUTINE_TESTING)
+    testImplementation(Libs.MOCKK)
+    testImplementation(Libs.ARCH_CORE_TESTING)
+    androidTestImplementation(Libs.ESPRESSO_CORE)
+    androidTestImplementation(Libs.ESPRESSO_CONTRIB)
+    androidTestImplementation(Libs.ANDROID_TEST_RUNNER)
+}
+
+kapt {
+    correctErrorTypes = true
+}

@@ -1,0 +1,1 @@
+/Users/vend/Documents/Android Learning/PostApp/buildSrc/build/classes/kotlin/main/Config.class:/Users/vend/Documents/Android Learning/PostApp/buildSrc/build/classes/kotlin/main/Libs.class:/Users/vend/Documents/Android Learning/PostApp/buildSrc/build/classes/kotlin/main/Versions.class

@@ -1,0 +1,65 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id("kotlin-parcelize")
+}
+
+android {
+    compileSdk Versions.COMPILE_SDK
+
+    defaultConfig {
+        minSdk Versions.MIN_SDK
+        targetSdk Versions.TARGET_SDK
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    //Network
+    implementation(Libs.RETROFIT)
+    implementation(Libs.MOSHI_KOTLIN)
+    implementation(Libs.MOSHI_CONVERTER)
+    kapt(Libs.MOSHI_KOTLIN_CODE_GEN)
+
+    // Jetpack
+    implementation(Libs.COROUTINE_CORE)
+
+
+    //dagger hilt
+    implementation(Libs.HILT)
+    kapt(Libs.HILT_COMPILER)
+
+    //Testing
+    testImplementation(Libs.JUNIT)
+    testImplementation(Libs.COROUTINE_TESTING)
+    testImplementation(Libs.MOCKK)
+    testImplementation(Libs.ARCH_CORE_TESTING)
+    testImplementation(Libs.MOCK_WEB_SERVER)
+
+    // modules
+    implementation project(path: ':core')
+}
+
+kapt {
+    correctErrorTypes = true
+}
